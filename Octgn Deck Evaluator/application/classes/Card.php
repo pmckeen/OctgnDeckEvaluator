@@ -1,11 +1,12 @@
 <?php
+require_once "services/ValueLookup.php";
 class Card {
 	protected $name;
 	protected $value;
 	protected $set;
 	protected $colors;
 	protected $qty;
-	
+
 	public function __construct( $inName, $inQty = 1, $inValue = 0, $inSet="", /*array*/$inColors=array()){
 		if( isset( $inName ))
 		{
@@ -24,6 +25,7 @@ class Card {
 	{
 		return $this->name;
 	}
+
 	public function calculateValue()
 	{
 		$this->value = ValueLookup::getValue($this);

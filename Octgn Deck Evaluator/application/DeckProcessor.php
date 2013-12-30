@@ -30,7 +30,7 @@ else
 	
 	$cards = $deck->getCards();
 	foreach($cards as $card){
-		echo "<li>".$card->getName()." x".$card->getQty()."@".$card->getValue()."</li>";
+		echo "<li>".$card->getName()." x".$card->getQty()."@".$card->getValue()."ea</li>";
 	}
 	echo "</ul>";
 }
