@@ -32,5 +32,8 @@ class Card {
 	{
 		return $this->qty;
 	}
-	
+	public function getValue()
+	{
+		return $this->value;
+	}
 }

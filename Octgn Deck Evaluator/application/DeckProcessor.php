@@ -27,9 +27,10 @@ else
 		$deck->addCard(new Card($name, $qty ));
 	}
 	echo $deck->getName()."<ul>";
+	
 	$cards = $deck->getCards();
 	foreach($cards as $card){
-		echo "<li>".$card->getName()." x".$card->getQty()."</li>";
+		echo "<li>".$card->getName()." x".$card->getQty()."@".$card->getValue()."</li>";
 	}
 	echo "</ul>";
 }
