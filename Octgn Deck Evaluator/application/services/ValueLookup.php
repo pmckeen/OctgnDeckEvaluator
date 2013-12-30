@@ -9,12 +9,12 @@ class ValueLookup{
 		$pageContent = curl_exec($curlhandle);
 		curl_close($curlhandle);
 		
-		preg_match_all( '/036;">\$([\d\.]+)<\/TD>/',$pageContent,$prices);
+		preg_match_all( '/036;">\$([\d,\.]+)<\/TD>/',$pageContent,$prices);
 		$firstPrice;
 		foreach($prices[1] as $price)
 		{
 			if(!isset($firstPrice)){
-				$firstPrice = $price;
+				$firstPrice = str_replace(",","",$price);
 			}		
 		}
 		if(!isset($firstPrice)){
