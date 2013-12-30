@@ -8,7 +8,7 @@ if($_FILES["file"]["error"]>0)
 else
 {
 	/*echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-	echo "Type: " . $_FILES["file"]["type"] . "<br>";
+	 echo "Type: " . $_FILES["file"]["type"] . "<br>";
 	echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
 	echo "Stored in: " . $_FILES["file"]["tmp_name"];*/
 	$deckFile = simplexml_load_file($_FILES["file"]["tmp_name"]);
@@ -16,7 +16,7 @@ else
 	$mainCardQtys = $deckFile->xpath("//section[@name='Main']/card/@qty");
 	$sideboardCardNames = $deckFile->xpath("//section[@name='Sideboard']/card");
 	$sideboardCardQtys = $deckFile->xpath("//section[@name='Sideboard']/card/@qty");
-	
+
 	$deck = new Deck($_FILES["file"]["name"]);
 	foreach ($mainCardNames as $index=> $name){
 		$qty = $mainCardQtys[$index];
@@ -27,10 +27,14 @@ else
 		$deck->addCard(new Card($name, $qty ));
 	}
 	echo $deck->getName()."<ul>";
-	
+	$totalValue = '0';
 	$cards = $deck->getCards();
+
 	foreach($cards as $card){
 		echo "<li>".$card->getName()." x".$card->getQty()."@".$card->getValue()."ea</li>";
+
+		$totalValue = bcadd($totalValue, bcmul($card->getValue(),$card->getQty(),2),2);
 	}
 	echo "</ul>";
+	echo "Total: ".$totalValue;
 }
