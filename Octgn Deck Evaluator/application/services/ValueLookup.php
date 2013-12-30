@@ -4,6 +4,7 @@ class ValueLookup{
 		$cardName = $card->getName();
 		$cardPriceUrl = "http://magic.tcgplayer.com/db/magic_single_card.asp?cn=".$cardName;
 		$cardPriceUrl = str_replace(" ","%20", $cardPriceUrl);
+		$cardPriceUrl = str_replace("Æ","Ae", $cardPriceUrl);
 		$curlhandle = curl_init($cardPriceUrl);
 		curl_setopt($curlhandle, CURLOPT_RETURNTRANSFER, 1);
 		$pageContent = curl_exec($curlhandle);
