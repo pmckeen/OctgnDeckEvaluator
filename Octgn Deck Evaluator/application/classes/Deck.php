@@ -2,7 +2,7 @@
 class Deck {
 	protected $name;
 	protected $cards;
-	
+	protected $calculated = false;
 	public function __construct(/*string*/ $name)
 	{
 		if( isset($name))
@@ -13,8 +13,9 @@ class Deck {
 		{
 			throw new Exception("name not set, name is required");
 		}
-		
+
 	}
+	
 	public function addCard( /*Card*/ $card )
 	{
 		if( isset($this->cards) ){
@@ -22,11 +23,21 @@ class Deck {
 		}else{
 			$this->cards=array(0=>$card);
 		}
+		$this->calculated = false;
 	}
+	
 	public function getCards()
 	{
-		$cardsCopy = $this->cards;
-		return $cardsCopy;		
+		if(isset($this->cards)){
+			if(!$this->calculated){
+				foreach ($this->cards as /*Card*/ $card){
+					$card->calculateValue();
+				}
+				$this->calculated = true;
+			}
+			$cardsCopy = $this->cards;
+			return $cardsCopy;
+		}
 	}
 	public function getName()
 	{
